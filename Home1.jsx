@@ -286,8 +286,10 @@ const ScrollStory = () => {
           ))}
         </div>
 
-        {/* Phone column — sticky */}
-        <div style={storyStyles.phoneCol}>
+        {/* Phone column — sticky (desktop only; hidden on mobile via
+            mobile.css because the story frames inside are also hidden
+            on mobile, which leaves the bezel empty) */}
+        <div className="bs-mobile-hide" style={storyStyles.phoneCol}>
           <div style={storyStyles.phoneFrame}>
             <div style={storyStyles.phoneScreen}>
               {/* 4 crossfading frame layers */}

@@ -192,6 +192,18 @@ img, svg, video {
   }
 }
 
+/* ─── 6b. Generic mobile-hide hook ───
+ * Any element marked .bs-mobile-hide disappears at ≤768px.
+ * Used for the ScrollStory's sticky phone column — the frame
+ * visualizations inside are already hidden (rule #6), so the
+ * empty bezel was left dangling at the bottom of the section. */
+
+@media (max-width: 768px) {
+  .bs-mobile-hide {
+    display: none !important;
+  }
+}
+
 /* ─── 7. Footer ─── */
 
 @media (max-width: 768px) {
