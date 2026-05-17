@@ -263,11 +263,6 @@ const FinalCTA = ({ go }) => (
         <a href="https://apps.apple.com/us/app/beach-spot/id6762165460" target="_blank" rel="noopener noreferrer"><img src="/assets/badges/app-store.svg" alt="App Store" style={{ height: 60 }}/></a>
         <a href="mailto:hello@beachspotapp.com?subject=Android%20app%20preview"><img src="/assets/badges/google-play.svg" alt="Google Play" style={{ height: 60 }}/></a>
       </div>
-      <div style={{ marginTop: 28, font: '500 13px var(--font-body)' }}>
-        <a href="#" onClick={(e) => { e.preventDefault(); go('lot-owners'); }} style={{ color: 'var(--bs-ocean-deep)', textDecoration: 'none', borderBottom: '1px solid currentColor' }}>
-          Own a parking lot? List it on BeachSpot →
-        </a>
-      </div>
     </div>
   </section>
 );
