@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <clipPath id="sq"><rect width="200" height="200" rx="44"></rect></clipPath>
+    <linearGradient id="bg" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3DAFFB"></stop>
+      <stop offset="100%" stop-color="#2493E0"></stop>
+    </linearGradient>
+    <linearGradient id="sun" x1="100" y1="50" x2="100" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FAD25A"></stop>
+      <stop offset="100%" stop-color="#EBA918"></stop>
+    </linearGradient>
+    <linearGradient id="hat" x1="100" y1="98" x2="100" y2="160" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F0DCB0"></stop>
+      <stop offset="100%" stop-color="#D9BD86"></stop>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#sq)">
+    <rect width="200" height="200" fill="url(#bg)"></rect>
+    
+    <path d="M70 70 L 200 200 L 200 0 Z" fill="#0E365B" opacity="0.12"></path>
+    
+    <circle cx="100" cy="92" r="36" fill="url(#sun)"></circle>
+    
+    <path d="M100 158 L 64 110 Q 100 100 136 110 Z" fill="url(#hat)"></path>
+    
+    <ellipse cx="100" cy="111" rx="56" ry="9" fill="url(#hat)"></ellipse>
+    <ellipse cx="100" cy="111" rx="56" ry="9" fill="#000" opacity="0.04"></ellipse>
+    
+    <ellipse cx="92" cy="108.5" rx="36" ry="2" fill="#FFF6DD" opacity="0.55"></ellipse>
+  </g>
+</svg>

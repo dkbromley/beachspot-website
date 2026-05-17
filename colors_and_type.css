@@ -1,0 +1,368 @@
+/* ============================================================
+   BeachSpot Design Tokens
+   Colors, type, spacing, radii, shadows, motion.
+   Load this once at the top of any page.
+   ============================================================ */
+
+/* Webfonts.
+   - Bricolage Grotesque (display)  → Google Fonts (no brand file provided)
+   - Geist (body)                   → self-hosted from /fonts (user-supplied)
+   - Geist Mono (mono)              → self-hosted from /fonts (user-supplied)
+*/
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap');
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Bold.ttf') format('truetype');
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMono-Medium.ttf') format('truetype');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMono-Bold.ttf') format('truetype');
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- Color: brand temperature anchors ----------
+     Anchored to the real BeachSpot app icon (sky blue + sun + cream pin). */
+  --bs-ocean:        #2EA3F2;  /* primary brand, sky blue */
+  --bs-ocean-deep:   #1B7BC4;  /* hover, deeper sky */
+  --bs-ocean-ink:    #0E365B;  /* darkest brand blue, almost-navy */
+  --bs-sun:          #F6C740;  /* sun yellow, from icon */
+  --bs-sun-deep:     #E4A91A;  /* sun hover / late afternoon */
+  --bs-sand:         #ECD7AA;  /* cream pin / sand, from icon */
+  --bs-sand-deep:    #D6BD86;  /* sand divider, darker dune */
+  --bs-foam:         #F5FAFF;  /* default surface, sky-tinted white */
+  --bs-foam-deep:    #E5F1FB;  /* very subtle sky-tinted surface */
+  --bs-midnight:     #0B2740;  /* primary text on light */
+  --bs-midnight-2:   #385166;  /* secondary text on light */
+  --bs-midnight-3:   #6B7E92;  /* tertiary text / placeholder */
+  --bs-coral:        #FF6B5C;  /* hot accent, "circling" pain */
+
+  /* ---------- Color: lot status (semantic) ---------- */
+  --bs-open:         #1FB87A;  /* lot available */
+  --bs-open-bg:      #DCF5EA;  /* open pill background */
+  --bs-limited:      #F59E0B;  /* lot limited */
+  --bs-limited-bg:   #FDEFD4;  /* limited pill background */
+  --bs-full:         #FF6B5C;  /* lot full */
+  --bs-full-bg:      #FFE2DD;  /* full pill background */
+  --bs-unknown:      #6B8390;  /* lot unknown / stale */
+  --bs-unknown-bg:   #E5ECEF;
+
+  /* ---------- Color: surfaces & semantic ---------- */
+  --bg-page:         var(--bs-foam);
+  --bg-surface:      #FFFFFF;
+  --bg-surface-warm: #FFFAF1;     /* faint warm tint, used inside sand sections */
+  --bg-elevated:     #FFFFFF;
+  --fg-1:            var(--bs-midnight);
+  --fg-2:            var(--bs-midnight-2);
+  --fg-3:            var(--bs-midnight-3);
+  --fg-inv:          #FFFFFF;
+  --link:            var(--bs-ocean-deep);
+  --link-hover:      var(--bs-ocean-ink);
+
+  /* ---------- Color: borders & dividers ---------- */
+  --border-hair:     rgba(11, 39, 64, 0.08);
+  --border-soft:     rgba(11, 39, 64, 0.14);
+  --border-strong:   rgba(11, 39, 64, 0.22);
+  --border-ocean:    rgba(46, 163, 242, 0.36);
+
+  /* ---------- Coastal gradients ---------- */
+  --bg-sky-gradient: linear-gradient(180deg,
+    #FFE8B8 0%,        /* low sun */
+    #FFD08A 14%,
+    #F8B98C 30%,       /* warm horizon */
+    #C8DFF8 56%,
+    #6BB6F0 78%,
+    #2EA3F2 100%);
+  --bg-dawn-gradient: linear-gradient(180deg, #FFF6E2 0%, #FFE3B5 40%, #FBC894 100%);
+  --bg-water-gradient: linear-gradient(180deg, #6FBCF2 0%, #2EA3F2 55%, #1B7BC4 100%);
+  --bg-sand-gradient: linear-gradient(180deg, #FFF8EA 0%, #ECD7AA 100%);
+
+  /* Grain noise overlay (svg data uri) — apply as background-image */
+  --bg-grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.42 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+
+  /* ---------- Spacing scale (4pt) ---------- */
+  --sp-0:   0;
+  --sp-1:   4px;
+  --sp-2:   8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+  --sp-11: 160px;
+
+  /* ---------- Radii ---------- */
+  --radius-sm:   8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-xl:  32px;
+  --radius-2xl: 44px;
+  --radius-pill: 999px;
+
+  /* ---------- Shadows (sky-blue tinted, never pure black) ---------- */
+  --shadow-1: 0 1px 2px rgba(14, 54, 91, 0.06), 0 1px 1px rgba(14, 54, 91, 0.04);
+  --shadow-2: 0 4px 8px rgba(14, 54, 91, 0.08), 0 2px 4px rgba(14, 54, 91, 0.05);
+  --shadow-3: 0 12px 24px rgba(14, 54, 91, 0.10), 0 6px 12px rgba(14, 54, 91, 0.06);
+  --shadow-4: 0 24px 48px rgba(14, 54, 91, 0.14), 0 12px 24px rgba(14, 54, 91, 0.08);
+  --shadow-glow: 0 0 0 4px rgba(46, 163, 242, 0.22);
+  --shadow-sun:  0 0 32px rgba(246, 199, 64, 0.5);
+  --shadow-inner-card: inset 0 1px 0 rgba(255,255,255,0.7);
+
+  /* ---------- Motion ---------- */
+  --ease-tide: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-tide: cubic-bezier(0.7, 0, 0.84, 0);
+  --dur-micro: 120ms;
+  --dur-default: 220ms;
+  --dur-panel: 400ms;
+  --dur-story: 700ms;
+  --dur-ambient: 1200ms;
+
+  /* ---------- Type: families ---------- */
+  --font-display: 'Bricolage Grotesque', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body:    'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ---------- Type ramp (size / line / weight / letterspacing) ---------- */
+  --type-display-xl-size: 96px;
+  --type-display-xl-line: 96px;
+  --type-display-xl-weight: 600;
+  --type-display-xl-tracking: -0.03em;
+
+  --type-display-lg-size: 72px;
+  --type-display-lg-line: 76px;
+  --type-display-lg-weight: 600;
+  --type-display-lg-tracking: -0.025em;
+
+  --type-display-md-size: 56px;
+  --type-display-md-line: 60px;
+  --type-display-md-weight: 600;
+  --type-display-md-tracking: -0.02em;
+
+  --type-h1-size: 40px; --type-h1-line: 44px; --type-h1-weight: 600; --type-h1-tracking: -0.02em;
+  --type-h2-size: 32px; --type-h2-line: 36px; --type-h2-weight: 600; --type-h2-tracking: -0.015em;
+  --type-h3-size: 24px; --type-h3-line: 30px; --type-h3-weight: 600; --type-h3-tracking: -0.01em;
+
+  --type-eyebrow-size: 13px;
+  --type-eyebrow-line: 16px;
+  --type-eyebrow-weight: 600;
+  --type-eyebrow-tracking: 0.16em;
+
+  --type-body-lg-size: 20px; --type-body-lg-line: 30px;
+  --type-body-size:    17px; --type-body-line:    26px;
+  --type-body-sm-size: 15px; --type-body-sm-line: 22px;
+  --type-caption-size: 13px; --type-caption-line: 18px;
+  --type-mono-size:    13px; --type-mono-line:    18px;
+}
+
+/* ============================================================
+   Base resets + element defaults — sane, opt-in via class.
+   ============================================================ */
+html, body {
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+/* ============================================================
+   Semantic typography classes.
+   Use .h1 on a span or h1 — pick the right SEMANTIC tag, this is only style.
+   ============================================================ */
+.display-xl,
+.display-lg,
+.display-md,
+.h1, .h2, .h3 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  color: var(--fg-1);
+  margin: 0;
+  text-wrap: balance;
+}
+.display-xl { font-size: var(--type-display-xl-size); line-height: var(--type-display-xl-line); font-weight: var(--type-display-xl-weight); letter-spacing: var(--type-display-xl-tracking); }
+.display-lg { font-size: var(--type-display-lg-size); line-height: var(--type-display-lg-line); font-weight: var(--type-display-lg-weight); letter-spacing: var(--type-display-lg-tracking); }
+.display-md { font-size: var(--type-display-md-size); line-height: var(--type-display-md-line); font-weight: var(--type-display-md-weight); letter-spacing: var(--type-display-md-tracking); }
+.h1 { font-size: var(--type-h1-size); line-height: var(--type-h1-line); font-weight: var(--type-h1-weight); letter-spacing: var(--type-h1-tracking); }
+.h2 { font-size: var(--type-h2-size); line-height: var(--type-h2-line); font-weight: var(--type-h2-weight); letter-spacing: var(--type-h2-tracking); }
+.h3 { font-size: var(--type-h3-size); line-height: var(--type-h3-line); font-weight: var(--type-h3-weight); letter-spacing: var(--type-h3-tracking); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--type-eyebrow-size);
+  line-height: var(--type-eyebrow-line);
+  font-weight: var(--type-eyebrow-weight);
+  letter-spacing: var(--type-eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--bs-ocean-deep);
+}
+
+.body-lg { font-size: var(--type-body-lg-size); line-height: var(--type-body-lg-line); color: var(--fg-2); text-wrap: pretty; }
+.body    { font-size: var(--type-body-size);    line-height: var(--type-body-line);    color: var(--fg-2); text-wrap: pretty; }
+.body-sm { font-size: var(--type-body-sm-size); line-height: var(--type-body-sm-line); color: var(--fg-2); }
+.caption { font-size: var(--type-caption-size); line-height: var(--type-caption-line); color: var(--fg-3); font-weight: 500; }
+.mono    { font-family: var(--font-mono); font-size: var(--type-mono-size); line-height: var(--type-mono-line); }
+
+/* Inline italic for emotional emphasis (Beach Spot voice) */
+.serif-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* ============================================================
+   Buttons (referenced by UI kit; reusable)
+   ============================================================ */
+.bs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  padding: 14px 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--dur-default) var(--ease-tide),
+              box-shadow var(--dur-default) var(--ease-tide),
+              transform var(--dur-micro) var(--ease-tide),
+              color var(--dur-default) var(--ease-tide);
+  white-space: nowrap;
+}
+.bs-btn:focus-visible { outline: none; box-shadow: var(--shadow-glow); }
+.bs-btn:active { transform: scale(0.98); }
+
+.bs-btn--primary {
+  background: var(--bs-ocean);
+  color: #fff;
+  box-shadow: var(--shadow-2);
+}
+.bs-btn--primary:hover {
+  background: var(--bs-ocean-deep);
+  box-shadow: var(--shadow-3);
+}
+
+.bs-btn--secondary {
+  background: transparent;
+  color: var(--bs-ocean-deep);
+  border-color: var(--border-ocean);
+}
+.bs-btn--secondary:hover {
+  background: rgba(14, 165, 192, 0.08);
+}
+
+.bs-btn--ghost {
+  background: transparent;
+  color: var(--bs-midnight);
+}
+.bs-btn--ghost:hover { background: rgba(11, 42, 58, 0.06); }
+
+.bs-btn--lg { font-size: 18px; padding: 18px 28px; border-radius: var(--radius-lg); }
+.bs-btn--sm { font-size: 14px; padding: 10px 16px; }
+
+/* ============================================================
+   Status pills — lot availability
+   ============================================================ */
+.bs-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.bs-pill::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.bs-pill--open    { color: var(--bs-open);    background: var(--bs-open-bg); }
+.bs-pill--limited { color: #B66B00;           background: var(--bs-limited-bg); }
+.bs-pill--full    { color: #C53A2C;           background: var(--bs-full-bg); }
+.bs-pill--unknown { color: var(--bs-unknown); background: var(--bs-unknown-bg); }
+
+/* ============================================================
+   Card
+   ============================================================ */
+.bs-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hair);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+  padding: var(--sp-6);
+  transition: transform var(--dur-default) var(--ease-tide),
+              box-shadow var(--dur-default) var(--ease-tide);
+}
+.bs-card--hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-3);
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

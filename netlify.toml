@@ -1,0 +1,53 @@
+[build]
+  # No build step — the site is plain static HTML + CSS + JSX compiled
+  # in-browser by Babel. Netlify serves the repo root as-is.
+  publish = "."
+
+# Security + caching headers. Coastal-soft on the marketing surface;
+# the portal at app.beachspotapp.com has its own stricter rules.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Long-cache the immutable assets — fonts, illustrations, badges,
+# the app icon. These are content-addressed by name; bump the
+# filename if you ever swap an asset.
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# The SPA renders /lot-owners, /support, /privacy, /terms via in-page
+# hash routing (#lot-owners, etc.). Redirect those URLs to the hash
+# equivalents so deep links from outside the app still land in the
+# right place. App Store + mobile-app deep links to /privacy and
+# /terms continue to work because the page renders the legal content
+# client-side once the SPA loads.
+[[redirects]]
+  from = "/lot-owners"
+  to = "/#lot-owners"
+  status = 200
+
+[[redirects]]
+  from = "/support"
+  to = "/#support"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/#privacy"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/#terms"
+  status = 200

@@ -1,0 +1,306 @@
+/* ============================================================
+   BeachSpot — Motion & Polish layer
+   Loaded after styles.css. Adds:
+   - Scroll progress bar
+   - Word/line splitter primitives
+   - Magnetic CTA wrappers
+   - Card hover refinements
+   - Live ticker marquee
+   - Section dividers (wave/curve)
+   - Refined nav with active-pill + scroll shrink
+   ============================================================ */
+
+/* ---------- Scroll progress bar ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg,
+    var(--bs-ocean) 0%,
+    var(--bs-sun) 60%,
+    var(--bs-coral) 100%);
+  z-index: 1000;
+  pointer-events: none;
+  box-shadow: 0 0 14px rgba(46, 163, 242, 0.6);
+  transition: width 80ms linear;
+  border-bottom-right-radius: 2px;
+}
+
+/* ---------- Word/line reveal primitives ----------
+   Wrap text in .word-reveal, the JS will split it into <span class="word">
+   and animate each word in with stagger. */
+.word-reveal { overflow: hidden; display: inline-block; line-height: inherit; }
+.word-reveal .word {
+  display: inline-block;
+  white-space: pre;
+  opacity: 0;
+  transform: translateY(110%) rotate(6deg);
+  will-change: transform, opacity;
+}
+.word-reveal.in .word {
+  animation: wordRise 900ms var(--ease-tide) forwards;
+}
+@keyframes wordRise {
+  to { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+.word-reveal .word-inner { display: inline-block; }
+
+/* ---------- Line-mask reveal (for headings/eyebrows) ---------- */
+.mask-reveal { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.mask-reveal > * {
+  display: inline-block;
+  transform: translateY(100%);
+  transition: transform 900ms var(--ease-tide);
+}
+.mask-reveal.in > * { transform: translateY(0); }
+
+/* ---------- Refined reveal (overrides simple fade-up) ---------- */
+body.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.985);
+  transition: opacity 900ms var(--ease-tide),
+              transform 900ms var(--ease-tide);
+}
+body.js-reveal .reveal.in-view,
+body.js-reveal .reveal[data-revealed="1"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Card-stagger entry ---------- */
+[data-card-stagger] > * {
+  opacity: 0;
+  transform: translateY(40px) rotateX(8deg);
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  will-change: opacity, transform;
+}
+[data-card-stagger].in > * {
+  animation: cardRise 900ms var(--ease-tide) forwards;
+}
+[data-card-stagger].in > *:nth-child(1) { animation-delay: 0ms; }
+[data-card-stagger].in > *:nth-child(2) { animation-delay: 110ms; }
+[data-card-stagger].in > *:nth-child(3) { animation-delay: 220ms; }
+[data-card-stagger].in > *:nth-child(4) { animation-delay: 330ms; }
+[data-card-stagger].in > *:nth-child(5) { animation-delay: 440ms; }
+@keyframes cardRise {
+  to { opacity: 1; transform: translateY(0) rotateX(0); }
+}
+
+/* ---------- How-it-works connector line ---------- */
+.connector-track {
+  position: absolute;
+  left: 5%; right: 5%;
+  top: 56px;
+  height: 2px;
+  pointer-events: none;
+  z-index: 0;
+}
+.connector-track::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(11, 39, 64, 0.12) 0 8px,
+    transparent 8px 16px
+  );
+}
+.connector-track::after {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: var(--track-progress, 0%);
+  background: linear-gradient(90deg, var(--bs-ocean) 0%, var(--bs-sun) 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(46, 163, 242, 0.5);
+  transition: width 80ms linear;
+}
+
+/* ---------- Refined nav ---------- */
+.bs-nav {
+  transition: padding var(--dur-default) var(--ease-tide),
+              background var(--dur-default) var(--ease-tide),
+              border-color var(--dur-default) var(--ease-tide),
+              backdrop-filter var(--dur-default) var(--ease-tide),
+              box-shadow var(--dur-default) var(--ease-tide);
+}
+.bs-nav.scrolled {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: rgba(247, 251, 252, 0.86);
+  box-shadow: 0 4px 24px rgba(14, 54, 91, 0.06);
+}
+.bs-nav__links { position: relative; }
+.bs-nav__link {
+  position: relative;
+  isolation: isolate;
+}
+.bs-nav__link::after {
+  content: '';
+  position: absolute;
+  left: 14px; right: 14px;
+  bottom: 4px;
+  height: 2px;
+  background: var(--bs-ocean);
+  border-radius: 2px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 380ms var(--ease-tide);
+}
+.bs-nav__link:hover::after,
+.bs-nav__link[aria-current="page"]::after { transform: scaleX(1); }
+
+/* ---------- Magnetic CTA wrapper ---------- */
+.magnetic {
+  display: inline-block;
+  transition: transform 220ms var(--ease-tide);
+  will-change: transform;
+}
+.magnetic > * { transition: transform 320ms var(--ease-tide); will-change: transform; }
+
+/* ---------- Lot card hover refinement ---------- */
+.bs-card, .lot-card-hoverable {
+  transition: transform 420ms var(--ease-tide),
+              box-shadow 420ms var(--ease-tide),
+              border-color 420ms var(--ease-tide);
+}
+.lot-card-hoverable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(14, 54, 91, 0.12), 0 8px 16px rgba(14, 54, 91, 0.06);
+  border-color: rgba(46, 163, 242, 0.32);
+}
+
+/* ---------- Live ticker rail ---------- */
+.ticker-rail {
+  position: relative;
+  background: linear-gradient(90deg,
+    var(--bs-ocean-ink) 0%,
+    #0a1c2b 50%,
+    var(--bs-ocean-ink) 100%);
+  color: #fff;
+  overflow: hidden;
+  padding: 18px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ticker-rail::before,
+.ticker-rail::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none;
+}
+.ticker-rail::before { left: 0;  background: linear-gradient(90deg, var(--bs-ocean-ink), transparent); }
+.ticker-rail::after  { right: 0; background: linear-gradient(-90deg, var(--bs-ocean-ink), transparent); }
+.ticker-track {
+  display: flex;
+  gap: 56px;
+  width: max-content;
+  animation: tickerSlide 38s linear infinite;
+}
+@keyframes tickerSlide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font: 500 14px var(--font-body);
+  color: rgba(255,255,255,0.78);
+  white-space: nowrap;
+}
+.ticker-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex: 0 0 auto;
+  box-shadow: 0 0 12px currentColor;
+}
+.ticker-dot--open { color: var(--bs-open); background: var(--bs-open); }
+.ticker-dot--limited { color: var(--bs-limited); background: var(--bs-limited); }
+.ticker-dot--full { color: var(--bs-full); background: var(--bs-full); }
+.ticker-sep { color: rgba(255,255,255,0.18); }
+.ticker-when { font: 500 12px var(--font-mono); color: rgba(255,255,255,0.45); }
+
+/* Pause on hover (desktop) */
+@media (hover: hover) {
+  .ticker-rail:hover .ticker-track { animation-play-state: paused; }
+}
+
+/* ---------- Section divider — soft curved transition between sections ---------- */
+.divider-curve {
+  display: block;
+  width: 100%;
+  height: 80px;
+  margin: -1px 0;
+}
+
+/* ---------- Sun rays — slow rotation ---------- */
+.sun-rays {
+  position: absolute;
+  width: 600px; height: 600px;
+  top: -10%; right: -8%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  animation: sunSpin 90s linear infinite;
+  transform-origin: center;
+}
+@keyframes sunSpin { to { transform: rotate(360deg); } }
+
+/* ---------- Floating bg blobs ---------- */
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+/* ---------- Counter type ---------- */
+.counter-stat {
+  font: 700 clamp(40px, 5vw, 64px) var(--font-display);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  display: block;
+  line-height: 1;
+}
+.counter-label {
+  font: 500 12px var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-top: 8px;
+  display: block;
+}
+
+/* ---------- Reduced motion safety ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .word-reveal .word,
+  .mask-reveal > *,
+  [data-card-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .ticker-track,
+  .sun-rays { animation: none !important; }
+  .scroll-progress { display: none; }
+}
+
+/* ---------- Make every section relatively positioned for clip dividers ---------- */
+section { position: relative; }
+
+/* ---------- Phone tilt holder ---------- */
+.phone-tilt {
+  display: inline-block;
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  will-change: transform;
+  transition: transform 420ms var(--ease-tide);
+}
+
+/* ---------- Hero CTAs lift ---------- */
+.cta-lift {
+  transition: transform 320ms var(--ease-tide), filter 320ms var(--ease-tide);
+}
+.cta-lift:hover { transform: translateY(-2px); filter: drop-shadow(0 14px 24px rgba(14, 54, 91, 0.25)); }

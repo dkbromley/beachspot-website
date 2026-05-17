@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+  <rect width="200" height="120" rx="14" fill="#E5F1FB"></rect>
+  <g stroke="#FFFFFF" stroke-width="6" stroke-linecap="round">
+    <path d="M-10 40 Q60 40 100 70 T210 90"></path>
+    <path d="M30 -10 L30 60 L80 90 L80 130"></path>
+    <path d="M150 -10 L150 50 L120 80 L120 130"></path>
+  </g>
+  <g stroke="#BFD7EF" stroke-width="1" stroke-linecap="round">
+    <path d="M-10 40 Q60 40 100 70 T210 90"></path>
+    <path d="M30 -10 L30 60 L80 90 L80 130"></path>
+    <path d="M150 -10 L150 50 L120 80 L120 130"></path>
+  </g>
+  <path d="M170 0 L200 0 L200 120 L180 120 Q170 90 175 60 Q180 30 170 0Z" fill="#9FCFF6"></path>
+  <g transform="translate(38,32)"><circle r="9" fill="#1FB87A"></circle><text y="3" text-anchor="middle" fill="#fff" font-size="10" font-family="sans-serif" font-weight="700">P</text></g>
+  <g transform="translate(95,55)"><circle r="9" fill="#F59E0B"></circle><text y="3" text-anchor="middle" fill="#fff" font-size="10" font-family="sans-serif" font-weight="700">P</text></g>
+  <g transform="translate(140,80)"><circle r="9" fill="#FF6B5C"></circle><text y="3" text-anchor="middle" fill="#fff" font-size="10" font-family="sans-serif" font-weight="700">P</text></g>
+  <g transform="translate(70,95)"><circle r="9" fill="#1FB87A"></circle><text y="3" text-anchor="middle" fill="#fff" font-size="10" font-family="sans-serif" font-weight="700">P</text></g>
+</svg>
