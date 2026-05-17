@@ -381,21 +381,8 @@ function App() {
 
   return (
     <div data-screen-label={screenLabels[route] || '01 Home'}>
-          {/* Route switcher (UI-kit-only) */}
-          <div className="route-switcher" role="tablist" aria-label="UI kit page switcher" data-comment-anchor="350203fda0-div-39-11">
-            <div className="route-switcher__buttons">
-            {[
-        ['home', 'Home'],
-        ['lot-owners', 'Lot owners'],
-        ['support', 'Support'],
-        ['privacy', 'Privacy'],
-        ['terms', 'Terms']].
-        map(([k, l]) =>
-        <button key={k} className={route === k ? 'active' : ''} onClick={() => go(k)}>{l}</button>
-        )}
-            </div>
-          </div>
-
+          {/* The Claude-Design UI-kit "PREVIEW" route switcher was
+              removed for production — top nav is the only nav. */}
           <Nav current={route} go={go} />
           {route === 'home' && <HomePage go={go} />}
           {route === 'lot-owners' && <LotOwnersPage go={go} />}

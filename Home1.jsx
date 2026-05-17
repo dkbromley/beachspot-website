@@ -120,9 +120,6 @@ const HeroSection = () => (
           <a href="https://apps.apple.com/us/app/beach-spot/id6762165460" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store"><img src="/assets/badges/app-store.svg" alt="App Store" style={heroStyles.badge}/></a>
           <a href="mailto:hello@beachspotapp.com?subject=Android%20app%20preview" aria-label="Join the Android preview"><img src="/assets/badges/google-play.svg" alt="Google Play" style={heroStyles.badge}/></a>
         </div>
-        <a href="#story" style={heroStyles.seeHow} className="reveal" data-delay="4" data-scroll-hint>
-          See how it works <Icon name="chevron-right" size={14} />
-        </a>
       </div>
       <div style={heroStyles.phoneWrap} data-hero-phone-holder>
         <div style={heroStyles.sunGlow} data-sun></div>
