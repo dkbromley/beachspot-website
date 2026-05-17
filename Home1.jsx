@@ -106,7 +106,7 @@ const HeroSection = () => (
       <ellipse cx="500" cy="20" rx="60" ry="6" fill="white" opacity="0.32"/>
       <ellipse cx="780" cy="14" rx="40" ry="4" fill="white" opacity="0.22"/>
     </svg>
-    <div style={heroStyles.grid}>
+    <div className="bs-mobile-stack" style={heroStyles.grid}>
       <div style={heroStyles.copy}>
         <div className="eyebrow mask-reveal" style={heroStyles.eyebrow} data-eyebrow-reveal><span>Made for the coast</span></div>
         <h1 className="display-xl" style={{ ...heroStyles.headline, fontSize: 'clamp(48px, 7vw, 96px)', lineHeight: 1 }}>
@@ -121,7 +121,7 @@ const HeroSection = () => (
           <a href="mailto:hello@beachspotapp.com?subject=Android%20app%20preview" aria-label="Join the Android preview"><img src="/assets/badges/google-play.svg" alt="Google Play" style={heroStyles.badge}/></a>
         </div>
       </div>
-      <div style={heroStyles.phoneWrap} data-hero-phone-holder>
+      <div className="bs-mobile-phone-shrink" style={heroStyles.phoneWrap} data-hero-phone-holder>
         <div style={heroStyles.sunGlow} data-sun></div>
         <PhoneMock tilt={-4}/>
         {/* Floating pin card */}
@@ -274,7 +274,7 @@ const ScrollStory = () => {
       <div style={storyStyles.topBleed}></div>
       <div style={storyStyles.bottomBleed}></div>
 
-      <div style={storyStyles.inner}>
+      <div className="bs-mobile-stack" style={storyStyles.inner}>
         {/* Copy column — each beat is its own viewport-height block */}
         <div style={storyStyles.copyCol}>
           {beats.map((b, i) => (

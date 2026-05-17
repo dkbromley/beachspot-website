@@ -32,7 +32,7 @@ const SupportPage = () => (
 
     <section style={supportStyles.cats}>
       <div style={supportStyles.catsInner}>
-        <div style={supportStyles.grid} className="reveal">
+        <div style={supportStyles.grid} className="reveal bs-mobile-stack-cards">
           {[
             { ic: 'map-pin', t: 'Using the app', d: 'Reporting lots, saving favorites, push notifications, account basics.' },
             { ic: 'parking', t: 'Lot owners', d: 'Listing your lot, attendants, dashboard, billing & cancellations.' },

@@ -1,0 +1,307 @@
+/* ──────────────────────────────────────────────────────────────────
+ * BeachSpot — mobile overrides.
+ *
+ * The Claude-Design handoff was a desktop-first prototype (1920px
+ * design width). This file makes everything readable + tappable on
+ * mobile + tablet without rewriting the components. Loaded AFTER
+ * the other stylesheets so it wins specificity; uses !important on
+ * inline-style overrides since React `style={{}}` lives in the
+ * style attribute (highest CSS specificity).
+ *
+ * Breakpoints (kept simple):
+ *   --bp-md:  768px  — tablet portrait
+ *   --bp-sm:  720px  — small tablet
+ *   --bp-xs:  480px  — phone
+ *
+ * One-pass goal: nothing overflows the viewport, every tap target
+ * is ≥44px, type stays readable at 360px wide, the hero phone
+ * scales to fit, and grids stack.
+ * ────────────────────────────────────────────────────────────── */
+
+/* ─── 0. Global hygiene ─── */
+
+html, body {
+  overflow-x: hidden;
+}
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+}
+* {
+  /* Belt-and-suspenders against fixed-pixel widths overflowing */
+  min-width: 0;
+}
+
+/* ─── 1. Typography scale on mobile ───
+ * The desktop tokens are 96/72/56/40/32px headings — way too big
+ * on phones. Halve-ish on mobile, restore on tablet+. */
+
+@media (max-width: 768px) {
+  :root {
+    --type-display-xl-size: 52px; --type-display-xl-line: 56px;
+    --type-display-lg-size: 44px; --type-display-lg-line: 48px;
+    --type-display-md-size: 36px; --type-display-md-line: 40px;
+    --type-h1-size: 30px; --type-h1-line: 34px;
+    --type-h2-size: 26px; --type-h2-line: 30px;
+    --type-h3-size: 21px; --type-h3-line: 26px;
+    --type-body-lg-size: 17px; --type-body-lg-line: 26px;
+    --type-body-size: 16px; --type-body-line: 24px;
+
+    /* Section rhythm shrinks too — 96–128px between sections is too
+       much vertical real estate on a phone. */
+    --sp-7: 28px;
+    --sp-8: 36px;
+    --sp-9: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --type-display-xl-size: 40px; --type-display-xl-line: 44px;
+    --type-display-lg-size: 34px; --type-display-lg-line: 38px;
+    --type-display-md-size: 28px; --type-display-md-line: 32px;
+  }
+}
+
+/* ─── 2. Multi-column grids → 1 column on mobile ───
+ * Inline `style={{gridTemplateColumns: '1.1fr 1fr'}}` etc. can only
+ * be beaten by !important + targeting. The JSX adds className
+ * "bs-mobile-stack" / "bs-mobile-stack-cards" to the relevant
+ * elements; mobile.css forces single-column. */
+
+@media (max-width: 768px) {
+  .bs-mobile-stack {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  /* 4-up card grids → 2 cols on tablet, 1 col on phone */
+  .bs-mobile-stack-cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+@media (max-width: 480px) {
+  .bs-mobile-stack-cards {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── 3. Top nav ───
+ * styles.css already hides .bs-nav__link siblings on ≤720px, but
+ * the wordmark + the "Get the app" pill still need to fit on a
+ * 320px viewport. Squeeze padding + cap wordmark size. */
+
+@media (max-width: 720px) {
+  .bs-nav {
+    padding: 12px 16px;
+  }
+  .bs-nav__brand img {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 10px !important;
+  }
+  .bs-nav__wordmark {
+    font-size: 20px !important;
+  }
+  .bs-nav__cta {
+    font-size: 13px !important;
+    padding: 8px 14px !important;
+  }
+}
+
+/* ─── 4. Hero ─── */
+
+@media (max-width: 768px) {
+  /* The hero `minHeight: 100vh` is appropriate for desktop where the
+     phone is large and side-by-side. On mobile we stack — let the
+     content dictate height instead. */
+  section[data-hero] {
+    min-height: auto !important;
+    padding-top: 84px !important;   /* clears the sticky nav */
+    padding-bottom: 56px !important;
+  }
+  /* The decorative sun glow + sun rays are huge fixed-pixel circles
+     that overflow narrow viewports. Shrink and reposition. */
+  section[data-hero] [data-sun] {
+    width: 220px !important;
+    height: 220px !important;
+    top: 4% !important;
+    right: -20px !important;
+  }
+  section[data-hero] .sun-rays {
+    transform: scale(0.55);
+    transform-origin: top right;
+  }
+  /* Phone shouldn't be the visual hero on a phone-sized screen */
+  .bs-mobile-phone-shrink {
+    transform: scale(0.7) !important;
+    margin: -56px auto !important;  /* compensate for the scaled-down whitespace */
+  }
+  /* Hero CTAs — App Store + Play badges — full width and stacked */
+  section[data-hero] .reveal img[alt="App Store"],
+  section[data-hero] .reveal img[alt="Google Play"] {
+    height: 48px !important;
+  }
+}
+@media (max-width: 480px) {
+  .bs-mobile-phone-shrink {
+    transform: scale(0.6) !important;
+    margin: -72px auto !important;
+  }
+}
+
+/* ─── 5. Floating pin callouts ───
+ * The Home1 hero has absolutely-positioned floating "lot card" pins
+ * with `minWidth: 230`. On mobile they overflow + crowd the phone.
+ * Hide on small screens — the phone-mock itself still tells the
+ * story. */
+
+@media (max-width: 768px) {
+  section[data-hero] [data-float] {
+    display: none !important;
+  }
+}
+
+/* ─── 6. Story section (sticky scroll narrative) ───
+ * The desktop version has a fixed phone on one side and changing
+ * "beats" on the other. On mobile the sticky behaviour doesn't
+ * have horizontal real-estate to work — let the beats just stack
+ * and scroll naturally. */
+
+@media (max-width: 768px) {
+  [data-story-section] {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  /* The fixed story-frame visualization gets hidden — beats
+     describe themselves with text alone. Otherwise users see a
+     stuck phone with nothing animating. */
+  [data-story-frame] {
+    display: none !important;
+  }
+  [data-story-atmosphere] {
+    display: none !important;
+  }
+  [data-story-dot] {
+    display: none !important;
+  }
+  /* Beats lose their tall sticky pacing — render compact */
+  [data-beat] {
+    min-height: auto !important;
+    padding: 32px 0 !important;
+  }
+}
+
+/* ─── 7. Footer ─── */
+
+@media (max-width: 768px) {
+  footer > div:first-child {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    text-align: left;
+  }
+  footer > div:last-child {
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: flex-start !important;
+    text-align: left;
+  }
+}
+
+/* ─── 8. Section padding ───
+ * The default .bs-section uses clamp(72px, 9vw, 128px) which is
+ * already responsive — but at 360px wide the 72px floor is still
+ * too much. Drop it. */
+
+@media (max-width: 480px) {
+  .bs-section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ─── 9. PhoneMock (Atoms.jsx — fixed 300x600) ───
+ * Defends against any phone-mock instance overflowing a narrow
+ * viewport. The .bs-mobile-phone-shrink helper handles the hero
+ * specifically; this rule catches all other instances by structural
+ * pattern (the bezel div). */
+
+@media (max-width: 480px) {
+  div[style*="border-radius: 44px"][style*="width: 300px"],
+  div[style*="borderRadius:44"][style*="width:300"] {
+    transform: scale(0.85);
+    transform-origin: center top;
+  }
+}
+
+/* ─── 10. Floating CTAs and tap targets ───
+ * Every <a>, <button>, .bs-btn — min height 44px (Apple HIG) on
+ * mobile. Most are already ≥44px from padding; this is a floor. */
+
+@media (max-width: 768px) {
+  .bs-btn,
+  a.bs-btn,
+  button.bs-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ─── 11. Lot owners pricing cards ───
+ * Pricing cards usually render side-by-side in a grid. On mobile
+ * they stack. (Targeted via `.bs-mobile-stack-cards` className
+ * added to the pricing grid in LotOwners.jsx.) */
+
+/* (Handled by rule #2 — .bs-mobile-stack-cards) */
+
+/* ─── 12. Ticker rail + counters band ─── */
+
+@media (max-width: 768px) {
+  /* The TickerRail is a marquee — already mobile-friendly. The
+     CountersBand renders 4 stats; rule #2 stacks it to 1 column on
+     phone, 2 on tablet. */
+}
+
+/* ─── 13. Hide UI-kit-only artifacts (defense-in-depth) ───
+ * The route switcher was removed from index.html but the CSS
+ * still defines its hidden state for ≤720px. No-op safety. */
+
+/* ─── 14. Reduce floating decorations on mobile ───
+ * Cloud parallax, sun rays, etc. add visual interest on desktop
+ * but cost paint time and battery on mobile. Disable parallax
+ * animations on prefers-reduced-motion AND on small viewports
+ * where they don't add value. */
+
+@media (max-width: 768px) {
+  [data-cloud-slow],
+  [data-cloud-fast] {
+    display: none !important;
+  }
+}
+
+/* ─── 15. Forms / contact / support page ───
+ * If/when forms get added, inputs need to be ≥16px font-size to
+ * prevent iOS auto-zoom on focus. Pre-emptive rule. */
+
+@media (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* ─── 16. Final CTA section (download) ─── */
+
+@media (max-width: 768px) {
+  section#download {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+  section#download img[alt="App Store"],
+  section#download img[alt="Google Play"] {
+    height: 52px !important;
+  }
+}

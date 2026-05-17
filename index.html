@@ -10,6 +10,13 @@
 <link rel="stylesheet" href="/colors_and_type.css">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="motion.css">
+<!--
+  Mobile overrides — loaded LAST so its !important rules win against
+  the desktop-first inline styles in the JSX components. Targets
+  className hooks like .bs-mobile-stack and .bs-mobile-phone-shrink
+  plus structural [data-hero], footer, etc. selectors.
+-->
+<link rel="stylesheet" href="mobile.css">
 <style>
   /* Page-level extras */
   html { scroll-behavior: smooth; }

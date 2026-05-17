@@ -271,7 +271,7 @@ const footerStyles = {
 };
 const Footer = ({ go }) => (
   <footer style={footerStyles.root}>
-    <div style={footerStyles.inner}>
+    <div className="bs-mobile-stack" style={footerStyles.inner}>
       <div style={footerStyles.brand}>
         <a href="#" onClick={(e) => { e.preventDefault(); go && go('home'); }} style={{ display: 'flex', alignItems: 'center', gap: 16, textDecoration: 'none' }}>
           <img src="/assets/icon.png" alt="" style={{ height: 72, width: 72, borderRadius: 18, boxShadow: '0 8px 20px rgba(0,0,0,0.25)' }}/>

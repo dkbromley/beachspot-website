@@ -8,7 +8,7 @@ const ownerHeroStyles = {
 
 const OwnerHero = () => (
   <section style={ownerHeroStyles.root}>
-    <div style={ownerHeroStyles.grid}>
+    <div className="bs-mobile-stack" style={ownerHeroStyles.grid}>
       <div className="reveal in-view">
         <div className="eyebrow" style={{ color: 'var(--bs-ocean-deep)' }}>For lot owners</div>
         <h1 className="display-lg" style={{ marginTop: 16, fontSize: 'clamp(40px,5.5vw,72px)' }}>
@@ -92,7 +92,7 @@ const OwnerValue = () => {
             Reach beachgoers at the exact moment they need parking.
           </h2>
         </div>
-        <div style={ownerValueStyles.grid} className="reveal">
+        <div style={ownerValueStyles.grid} className="reveal bs-mobile-stack-cards">
           {items.map((x, i) => (
             <div key={i} style={ownerValueStyles.card}>
               <div style={{ width: 46, height: 46, borderRadius: 14, background: 'var(--bs-foam-deep)', color: 'var(--bs-ocean-deep)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -357,7 +357,7 @@ const OwnerPricing = () => {
             Billed monthly or annually through Stripe on the web — never inside the mobile app.
           </p>
         </div>
-        <div style={pricingStyles.cards} className="reveal">
+        <div style={pricingStyles.cards} className="reveal bs-mobile-stack-cards">
           {tiers.map((t, i) => (
             <div key={i} style={{ ...pricingStyles.card, ...(t.feat ? pricingStyles.cardFeat : {}) }}>
               {t.feat && <div style={pricingStyles.ribbon}>★ Most popular</div>}

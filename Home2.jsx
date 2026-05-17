@@ -38,7 +38,7 @@ const HowItWorks = () => {
         </div>
         <div style={{ position: 'relative' }}>
           <div className="connector-track" data-connector></div>
-          <div style={howStyles.grid} data-card-stagger>
+          <div className="bs-mobile-stack-cards" style={howStyles.grid} data-card-stagger>
             {steps.map((s, i) => (
               <div key={i} style={howStyles.card} className="lot-card-hoverable">
                 <div style={{ ...howStyles.ico, position: 'absolute', top: 24, right: 24, marginTop: 0, background: i === 0 ? 'var(--bs-foam-deep)' : i === 1 ? 'rgba(31,184,122,0.12)' : i === 2 ? 'rgba(246,199,64,0.18)' : 'rgba(255,107,92,0.12)', color: i === 0 ? 'var(--bs-ocean-deep)' : i === 1 ? 'var(--bs-open)' : i === 2 ? '#B66B00' : 'var(--bs-coral)' }}><Icon name={s.icon} size={22}/></div>
@@ -75,7 +75,7 @@ const solutionStyles = {
 
 const SolutionSection = () => (
   <section style={solutionStyles.root}>
-    <div style={solutionStyles.inner}>
+    <div className="bs-mobile-stack" style={solutionStyles.inner}>
       <div className="reveal">
         <div className="eyebrow">The BeachSpot solution</div>
         <h2 className="display-md" style={{ marginTop: 14, fontSize: 'clamp(36px,5vw,56px)' }}>
@@ -143,7 +143,7 @@ const foodStyles = {
 
 const FoodNearby = () => (
   <section style={foodStyles.root}>
-    <div style={foodStyles.inner}>
+    <div className="bs-mobile-stack" style={foodStyles.inner}>
       <div className="reveal">
         <div className="eyebrow" style={{ color: '#B66B00' }}>After the beach</div>
         <h2 className="display-md" style={{ marginTop: 14, fontSize: 'clamp(36px,5vw,56px)' }}>
@@ -192,7 +192,7 @@ const communityStyles = {
 const CommunitySection = () => (
   <section style={communityStyles.root}>
     <style>{`@keyframes bspulse { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:0.4; transform:scale(1.4)} }`}</style>
-    <div style={communityStyles.inner}>
+    <div className="bs-mobile-stack" style={communityStyles.inner}>
       <div className="reveal">
         <div className="eyebrow" style={{ color: 'var(--bs-sun)' }}>Built by the coast</div>
         <h2 className="display-md" style={{ marginTop: 14, color: '#fff', fontSize: 'clamp(36px,5vw,56px)' }}>

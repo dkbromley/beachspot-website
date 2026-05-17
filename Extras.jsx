@@ -74,7 +74,7 @@ const CountersBand = () => {
             A coastline of beachgoers <span className="serif-italic" style={{ color: 'var(--bs-sun)' }}>helping each other park.</span>
           </h2>
         </div>
-        <div style={countersStyles.grid} data-card-stagger>
+        <div className="bs-mobile-stack-cards" style={countersStyles.grid} data-card-stagger>
           {stats.map((s, i) => (
             <div key={i} style={countersStyles.cell}>
               <span
