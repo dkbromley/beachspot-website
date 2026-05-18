@@ -18,11 +18,16 @@
  * scales to fit, and grids stack.
  * ────────────────────────────────────────────────────────────── */
 
-/* ─── 0. Global hygiene ─── */
+/* ─── 0. Global hygiene ───
+ * Mobile-only overflow-x hidden. Applying it to html/body at every
+ * screen size breaks `position: sticky` for ALL descendants — the
+ * scroll-story phone bezel was supposed to stay pinned to the
+ * viewport on desktop as the user scrolls past the 4 beats, and
+ * `overflow-x: hidden` on body silently disables that sticky
+ * positioning by changing the scroll container. Scoping the rule
+ * to ≤768px keeps mobile clean without sacrificing the desktop
+ * sticky behavior. */
 
-html, body {
-  overflow-x: hidden;
-}
 img, svg, video {
   max-width: 100%;
   height: auto;
@@ -30,6 +35,12 @@ img, svg, video {
 * {
   /* Belt-and-suspenders against fixed-pixel widths overflowing */
   min-width: 0;
+}
+
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+  }
 }
 
 /* ─── 1. Typography scale on mobile ───
