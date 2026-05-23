@@ -314,13 +314,13 @@ const TermsPage = ({ go }) => (
         The fine print, <span className="serif-italic" style={{ color: 'var(--bs-ocean-deep)' }}>kept short.</span>
       </h1>
       <p className="body" style={{ marginTop: 18, color: 'var(--fg-3)' }}>
-        Last updated: April 27, 2026 · Effective: April 27, 2026
+        Last updated: May 23, 2026 · Effective: May 23, 2026
       </p>
 
       <div style={legalStyles.short}>
         <div style={{ font: '600 14px var(--font-body)', color: 'var(--bs-ocean-deep)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>The short version</div>
         <p className="body" style={{ marginTop: 10, color: 'var(--fg-1)' }}>
-          Be a good beach neighbor. Report honestly. Don't break the law. We provide BeachSpot as-is and we may update it.
+          Be a good beach neighbor. Report honestly. <strong>Never use the app while driving.</strong> We provide BeachSpot as-is and we may update it.
         </p>
       </div>
 
@@ -328,20 +328,43 @@ const TermsPage = ({ go }) => (
         Welcome to BeachSpot. These Terms of Service ("Terms") govern your use of the BeachSpot mobile application and beachspotapp.com (together, the "Service"), operated by BeachSpot ("we," "us," "our"). By creating an account, downloading the app, or otherwise using the Service, you agree to these Terms. If you don't agree, please don't use the Service.
       </p>
 
-      {/* ---------- 1. Eligibility ---------- */}
-      <h2 className="h2" style={legalStyles.h}>1. Eligibility</h2>
+      {/* ---------- 1. Safe use ---------- */}
+      {/* Lifted to the top of the numbered sections as of May 2026 because
+          the previous burying of the distracted-driving warning in the
+          Acceptable Use bullet list (§4 in prior versions) wasn't visible
+          enough. Mirrors the in-app Safe Use section in
+          gsp-mobile/app/TermsOfServiceScreen.tsx for cross-surface parity. */}
+      <h2 className="h2" style={legalStyles.h}>1. Safe use</h2>
+      <div style={{ ...legalStyles.short, background: 'var(--bs-full-bg, rgba(220, 38, 38, 0.08))', borderColor: 'rgba(220, 38, 38, 0.35)', marginTop: 14 }}>
+        <div style={{ font: '600 14px var(--font-body)', color: '#7B0A0A', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Important</div>
+        <p className="body" style={{ marginTop: 10, color: 'var(--fg-1)' }}>
+          <strong>Do not use BeachSpot while driving.</strong> The Service is designed to be used before you start driving or after you have safely parked. Never interact with the app, view the map, or submit reports while operating a motor vehicle, bicycle, or any other moving vehicle.
+        </p>
+      </div>
+      <p className="body" style={{ marginTop: 18 }}>
+        You agree to comply with all applicable traffic and distracted-driving laws while using BeachSpot, and to use the app only when it is safe and lawful to do so. If you are driving, have a passenger operate the app on your behalf.
+      </p>
+      <p className="body" style={{ marginTop: 14 }}>
+        Parking availability shown in BeachSpot is based on real-time crowdsourced reports and lot-owner-supplied data. Availability can change minute by minute. We do not guarantee that a lot shown as available will still have spaces when you arrive. Always confirm availability visually before committing to a lot.
+      </p>
+      <p className="body" style={{ marginTop: 14 }}>
+        <strong>Assumption of risk.</strong> You acknowledge that you use BeachSpot at your own risk. We are not responsible for traffic citations, accidents, parking fees, towing costs, lost opportunities, or any other harm arising from your use of the app or reliance on its information.
+      </p>
+
+      {/* ---------- 2. Eligibility ---------- */}
+      <h2 className="h2" style={legalStyles.h}>2. Eligibility</h2>
       <p className="body">
         You must be at least 13 years old to use BeachSpot. By using the Service, you represent that you meet this requirement. If you're using the Service on behalf of a business (e.g., as a parking lot owner or attendant), you represent that you have authority to bind that business to these Terms.
       </p>
 
-      {/* ---------- 2. Your account ---------- */}
-      <h2 className="h2" style={legalStyles.h}>2. Your account</h2>
+      {/* ---------- 3. Your account ---------- */}
+      <h2 className="h2" style={legalStyles.h}>3. Your account</h2>
       <p className="body">
         You're responsible for keeping your login credentials secure and for everything that happens under your account. Notify us immediately at <a href="mailto:hello@beachspotapp.com" style={{ color: 'var(--bs-ocean-deep)' }}>hello@beachspotapp.com</a> if you suspect unauthorized access. You can browse as a guest, but some features (reporting, points, badges, lot management) require an account.
       </p>
 
-      {/* ---------- 3. How BeachSpot works ---------- */}
-      <h2 className="h2" style={legalStyles.h}>3. How BeachSpot works</h2>
+      {/* ---------- 4. How BeachSpot works ---------- */}
+      <h2 className="h2" style={legalStyles.h}>4. How BeachSpot works</h2>
       <p className="body">
         BeachSpot shows real-time parking availability based on reports submitted by other users, lot owners, and attendants. Availability information is crowdsourced and time-decayed — it reflects the best available signal at a given moment, but conditions change quickly.
       </p>
@@ -352,8 +375,8 @@ const TermsPage = ({ go }) => (
         </p>
       </div>
 
-      {/* ---------- 4. Acceptable use ---------- */}
-      <h2 className="h2" style={legalStyles.h}>4. Acceptable use</h2>
+      {/* ---------- 5. Acceptable use ---------- */}
+      <h2 className="h2" style={legalStyles.h}>5. Acceptable use</h2>
       <p className="body">You agree not to:</p>
       <PrivacyList items={[
         'Submit false, misleading, or spam reports.',
@@ -367,14 +390,14 @@ const TermsPage = ({ go }) => (
         We may suspend or terminate accounts that violate these rules, in our reasonable discretion.
       </p>
 
-      {/* ---------- 5. Rewards, points, and badges ---------- */}
-      <h2 className="h2" style={legalStyles.h}>5. Rewards, points, and badges</h2>
+      {/* ---------- 6. Rewards, points, and badges ---------- */}
+      <h2 className="h2" style={legalStyles.h}>6. Rewards, points, and badges</h2>
       <p className="body">
         Points, badges, streaks, and trust scores are non-monetary, non-transferable, and have no cash value. We may adjust the rewards system, recalculate scores, or remove fraudulent activity at any time. Rewards exist solely to encourage good reporting behavior.
       </p>
 
-      {/* ---------- 6. Lot owner subscriptions and payments ---------- */}
-      <h2 className="h2" style={legalStyles.h}>6. Lot owner subscriptions and payments</h2>
+      {/* ---------- 7. Lot owner subscriptions and payments ---------- */}
+      <h2 className="h2" style={legalStyles.h}>7. Lot owner subscriptions and payments</h2>
       <p className="body">
         If you subscribe to a paid lot owner plan (Starter, Growth, or Pro) or purchase an Event Boost, the following applies:
       </p>
@@ -386,68 +409,68 @@ const TermsPage = ({ go }) => (
         { t: 'Pricing', d: "we may change pricing with at least 30 days' notice; changes apply to the next billing period." },
       ]}/>
 
-      {/* ---------- 7. User-submitted content ---------- */}
-      <h2 className="h2" style={legalStyles.h}>7. User-submitted content</h2>
+      {/* ---------- 8. User-submitted content ---------- */}
+      <h2 className="h2" style={legalStyles.h}>8. User-submitted content</h2>
       <p className="body">
         When you submit a report, lot listing, photo, note, or other content ("User Content"), you grant BeachSpot a worldwide, royalty-free, non-exclusive license to use, display, modify, and distribute that content in connection with operating and improving the Service. You retain ownership of your User Content. You're responsible for making sure your submissions are accurate and don't infringe anyone else's rights.
       </p>
 
-      {/* ---------- 8. Intellectual property ---------- */}
-      <h2 className="h2" style={legalStyles.h}>8. Intellectual property</h2>
+      {/* ---------- 9. Intellectual property ---------- */}
+      <h2 className="h2" style={legalStyles.h}>9. Intellectual property</h2>
       <p className="body">
         The BeachSpot name, logo, app, website, and design are owned by us. You may not copy, modify, or create derivative works of the Service without our written permission. All other trademarks belong to their respective owners.
       </p>
 
-      {/* ---------- 9. Third-party services ---------- */}
-      <h2 className="h2" style={legalStyles.h}>9. Third-party services</h2>
+      {/* ---------- 10. Third-party services ---------- */}
+      <h2 className="h2" style={legalStyles.h}>10. Third-party services</h2>
       <p className="body">
         The Service uses third-party services (Stripe for payments, Mapbox for maps, Twilio for SMS, Apple/Google for push notifications, Supabase for backend, Sentry for monitoring). Your use of those services is also governed by their terms and privacy policies. We're not responsible for third-party outages or issues outside our control.
       </p>
 
-      {/* ---------- 10. Disclaimer of warranties ---------- */}
-      <h2 className="h2" style={legalStyles.h}>10. Disclaimer of warranties</h2>
+      {/* ---------- 11. Disclaimer of warranties ---------- */}
+      <h2 className="h2" style={legalStyles.h}>11. Disclaimer of warranties</h2>
       <p className="body">
         The Service is provided <strong style={{ color: 'var(--fg-1)' }}>"as is"</strong> and <strong style={{ color: 'var(--fg-1)' }}>"as available"</strong>, without warranties of any kind, express or implied, including but not limited to merchantability, fitness for a particular purpose, and non-infringement. We don't warrant that parking availability data will be accurate, complete, or timely, or that the Service will be uninterrupted or error-free.
       </p>
 
-      {/* ---------- 11. Limitation of liability ---------- */}
-      <h2 className="h2" style={legalStyles.h}>11. Limitation of liability</h2>
+      {/* ---------- 12. Limitation of liability ---------- */}
+      <h2 className="h2" style={legalStyles.h}>12. Limitation of liability</h2>
       <p className="body">
         To the fullest extent allowed by law, BeachSpot and its team will not be liable for indirect, incidental, special, consequential, or punitive damages — including lost profits, lost data, parking tickets, towing fees, or missed beach time — arising from your use of the Service. Our total liability for any claim is limited to the greater of (a) the amount you paid us in the 12 months before the claim, or (b) $50.
       </p>
 
-      {/* ---------- 12. Indemnification ---------- */}
-      <h2 className="h2" style={legalStyles.h}>12. Indemnification</h2>
+      {/* ---------- 13. Indemnification ---------- */}
+      <h2 className="h2" style={legalStyles.h}>13. Indemnification</h2>
       <p className="body">
         You agree to indemnify and hold BeachSpot harmless from any claims, damages, or expenses arising from your violation of these Terms, your User Content, or your use of the Service.
       </p>
 
-      {/* ---------- 13. Termination ---------- */}
-      <h2 className="h2" style={legalStyles.h}>13. Termination</h2>
+      {/* ---------- 14. Termination ---------- */}
+      <h2 className="h2" style={legalStyles.h}>14. Termination</h2>
       <p className="body">
         You can stop using the Service and delete your account at any time. We may suspend or terminate your access if you violate these Terms or if we discontinue the Service. Sections that should reasonably survive termination (like ownership, disclaimers, and limitation of liability) will survive.
       </p>
 
-      {/* ---------- 14. Governing law and disputes ---------- */}
-      <h2 className="h2" style={legalStyles.h}>14. Governing law and disputes</h2>
+      {/* ---------- 15. Governing law and disputes ---------- */}
+      <h2 className="h2" style={legalStyles.h}>15. Governing law and disputes</h2>
       <p className="body">
         These Terms are governed by the laws of the State of South Carolina, without regard to its conflict-of-laws rules. Any dispute will be resolved in the state or federal courts located in Horry County, South Carolina, and you consent to personal jurisdiction there.
       </p>
 
-      {/* ---------- 15. Changes to these Terms ---------- */}
-      <h2 className="h2" style={legalStyles.h}>15. Changes to these Terms</h2>
+      {/* ---------- 16. Changes to these Terms ---------- */}
+      <h2 className="h2" style={legalStyles.h}>16. Changes to these Terms</h2>
       <p className="body">
         We may update these Terms from time to time. Material changes will be announced in the app and reflected by the "Last updated" date at the top of this page. Continued use of the Service after changes take effect means you accept the updated Terms.
       </p>
 
-      {/* ---------- 16. Apple App Store additional terms ---------- */}
-      <h2 className="h2" style={legalStyles.h}>16. Apple App Store additional terms</h2>
+      {/* ---------- 17. Apple App Store additional terms ---------- */}
+      <h2 className="h2" style={legalStyles.h}>17. Apple App Store additional terms</h2>
       <p className="body">
         If you downloaded BeachSpot from the Apple App Store, you acknowledge that these Terms are between you and BeachSpot only — not Apple. Apple is not responsible for the Service or any claims related to it. Apple is, however, a third-party beneficiary of these Terms and may enforce them against you.
       </p>
 
-      {/* ---------- 17. Contact ---------- */}
-      <h2 className="h2" style={legalStyles.h}>17. Contact</h2>
+      {/* ---------- 18. Contact ---------- */}
+      <h2 className="h2" style={legalStyles.h}>18. Contact</h2>
       <p className="body">
         Questions about these Terms? Get in touch.
       </p>
